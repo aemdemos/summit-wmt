@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "url": "http://localhost:8888/",
+  "path": "index",
+  "timestamp": "2026-03-18T21:48:03.228Z",
+  "title": "Get It Fast - Walmart.com",
+  "template": "get-it-fast",
+  "blocks": [
+    "hero",
+    "hero",
+    "hero",
+    "hero",
+    "cards",
+    "cards",
+    "cards",
+    "card-carousel-bidirectional",
+    "card-carousel-bidirectional"
+  ]
+}

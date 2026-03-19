@@ -1,5 +1,6 @@
 @import url('./cards-tokens.css');
 
+/* Base cards grid */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -11,11 +12,37 @@
 
 .cards > ul > li {
   border: var(--cards-card-border-width) solid var(--cards-card-border-color);
+  border-radius: var(--border-radius-card, 12px);
   background-color: var(--background-color);
+  overflow: hidden;
 }
 
 .cards .cards-card-body {
   margin: var(--cards-card-body-margin);
+}
+
+.cards .cards-card-body p {
+  margin: 0 0 6px;
+  font-size: var(--body-font-size-s);
+  line-height: 1.4;
+}
+
+.cards .cards-card-body strong {
+  font-weight: 700;
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cards .cards-card-body a {
+  color: var(--link-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cards .cards-card-body a:hover {
+  text-decoration: underline;
 }
 
 .cards .cards-card-image {
@@ -26,4 +53,84 @@
   width: 100%;
   aspect-ratio: var(--cards-image-aspect-ratio);
   object-fit: var(--cards-image-object-fit);
+}
+
+/* ===== Hub-spoke variant: circular images, centered labels ===== */
+.cards.hub-spoke > ul {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.cards.hub-spoke > ul > li {
+  border: none;
+  background: none;
+  text-align: center;
+  border-radius: 0;
+}
+
+.cards.hub-spoke .cards-card-image {
+  display: flex;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.cards.hub-spoke .cards-card-image img {
+  width: 100%;
+  max-width: 140px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.cards.hub-spoke .cards-card-body {
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.cards.hub-spoke .cards-card-body .button-wrapper {
+  margin: 0;
+}
+
+.cards.hub-spoke .cards-card-body a.button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  padding: 4px 0;
+  border-radius: 0;
+  text-decoration: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: block;
+  line-height: 1.3;
+}
+
+.cards.hub-spoke .cards-card-body a.button:hover {
+  background: none;
+  text-decoration: underline;
+  color: var(--link-color);
+}
+
+/* Tablet: 6-across */
+@media (width >= 600px) {
+  .cards.hub-spoke > ul {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+  }
+
+  .cards.hub-spoke .cards-card-image img {
+    max-width: 160px;
+  }
+}
+
+/* Desktop */
+@media (width >= 900px) {
+  .cards.hub-spoke > ul {
+    gap: 32px;
+  }
+
+  .cards.hub-spoke .cards-card-image img {
+    max-width: 180px;
+  }
 }

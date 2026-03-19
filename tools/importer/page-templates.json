@@ -1,0 +1,146 @@
+{
+  "templates": [
+    {
+      "name": "get-it-fast",
+      "urls": [
+        "http://localhost:8888/"
+      ],
+      "description": "Walmart Get It Fast fulfillment landing page with hero banners, category card grids, product carousels, and promotional tiles",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "[data-testid=\"skinny-banner\"]",
+            "[data-dca-id=\"M:F1F94AD6C9\"]",
+            "[data-dca-id=\"M:6D7CF9AB52\"]",
+            "div.mv3[role=region]"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "[data-testid=\"HubSpokesNxM\"]",
+            "[data-dca-id=\"M:7841184E2C\"]"
+          ]
+        },
+        {
+          "name": "card-carousel-bidirectional",
+          "instances": [
+            "[data-testid=\"horizontal-scroller-Product Carousel\"]"
+          ]
+        },
+        {
+          "name": "card-carousel-bidirectional",
+          "instances": [
+            "[data-testid=\"horizontal-scroller-One and two sku\"]"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Page Title",
+          "selector": "main h1",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "main h1"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Hero Banner - Delivery Promise",
+          "selector": "[data-dca-id=\"M:8C60EE984E\"]",
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Weekly Musts Category Cards",
+          "selector": "section[data-dca-id=\"M:1F5D2073D5\"]@nth(0)",
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "section[data-dca-id=\"M:1F5D2073D5\"]:first-of-type h2"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "1-Hour Delivery Category Cards",
+          "selector": "section[data-dca-id=\"M:1F5D2073D5\"]@nth(1)",
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": [
+            "section[data-dca-id=\"M:1F5D2073D5\"]:last-of-type h2"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Spring Cleaning Hero + Product Carousel",
+          "selector": [
+            "[data-dca-id=\"M:F1F94AD6C9\"]",
+            "[data-dca-id=\"M:9B63096861\"]"
+          ],
+          "style": null,
+          "blocks": [
+            "hero",
+            "card-carousel-bidirectional"
+          ],
+          "defaultContent": [
+            "[data-dca-id=\"M:DF16D9EFF8\"] h2",
+            "[data-dca-id=\"M:DF16D9EFF8\"] h3"
+          ]
+        },
+        {
+          "id": "section-6",
+          "name": "Spring Flowers Banner",
+          "selector": "[data-dca-id=\"M:6D7CF9AB52\"]",
+          "style": "light-grey",
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-7",
+          "name": "Allergy Relief & Essentials Collection",
+          "selector": "[data-dca-id=\"M:7841184E2C\"]",
+          "style": null,
+          "blocks": [
+            "cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-8",
+          "name": "University FanCards",
+          "selector": "[data-dca-id=\"M:470F3095A8\"]",
+          "style": null,
+          "blocks": [
+            "hero",
+            "card-carousel-bidirectional"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-9",
+          "name": "Terms & Conditions",
+          "selector": "div.dark-gray.mh3.mh0-l.mv3.mv4-l",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "div.dark-gray.mh3 h1",
+            "div.dark-gray.mh3 span"
+          ]
+        }
+      ]
+    }
+  ]
+}

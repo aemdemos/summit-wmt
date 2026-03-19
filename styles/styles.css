@@ -358,6 +358,13 @@ main .section.dark a.button:focus {
   background-color: var(--light-color);
 }
 
+/* section metadata - light-grey variant */
+main .section.light-grey {
+  background-color: var(--light-color);
+  margin: 0;
+  padding: var(--spacing-xl) 0;
+}
+
 /* section metadata - accent variant (Walmart blue) */
 main .section.accent {
   background-color: var(--color-light-blue);
@@ -373,3 +380,61 @@ main .section.accent h5,
 main .section.accent h6 {
   color: var(--color-walmart-navy);
 }
+
+/* Two-column sections: hero + carousel side-by-side */
+@media (width >= 900px) {
+  main .section.hero-container.card-carousel-bidirectional-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: var(--max-width-site);
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-xl);
+  }
+
+  main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper {
+    grid-column: 1 / -1;
+    padding: 0;
+  }
+
+  main .section.hero-container.card-carousel-bidirectional-container > .hero-wrapper {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  main .section.hero-container.card-carousel-bidirectional-container > .card-carousel-bidirectional-wrapper {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+}
+
+/* ===== Terms & Conditions compact styling ===== */
+main > .section:last-of-type {
+  padding: var(--spacing-xl) 0;
+  margin: 0;
+}
+
+main > .section:last-of-type h1 {
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+  color: var(--text-color);
+}
+
+main > .section:last-of-type h1:first-child {
+  margin-top: 0;
+}
+
+main > .section:last-of-type p {
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color-secondary);
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+

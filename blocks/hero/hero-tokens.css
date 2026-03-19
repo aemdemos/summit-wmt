@@ -1,7 +1,7 @@
 /* hero design tokens */
 :root {
-  --hero-padding: 40px 24px;
-  --hero-padding-desktop: 40px 32px;
-  --hero-min-height: 300px;
-  --hero-heading-max-width: 1200px;
+  --hero-padding: 32px 24px;
+  --hero-padding-desktop: 48px 40px;
+  --hero-min-height: 280px;
+  --hero-heading-max-width: 600px;
 }
