@@ -21,4 +21,19 @@ export default function decorate(block) {
   });
   block.textContent = '';
   block.append(ul);
+
+  /* Auto-detect hub-spoke pattern: every card has an image + body with only a single link */
+  const cards = ul.querySelectorAll('li');
+  const isHubSpoke = cards.length > 0 && [...cards].every((li) => {
+    const imgDiv = li.querySelector('.cards-card-image');
+    const bodyDiv = li.querySelector('.cards-card-body');
+    if (!imgDiv || !bodyDiv) return false;
+    const links = bodyDiv.querySelectorAll('a');
+    const paragraphs = bodyDiv.querySelectorAll('p');
+    return links.length === 1 && paragraphs.length <= 1;
+  });
+
+  if (isHubSpoke) {
+    block.classList.add('hub-spoke');
+  }
 }

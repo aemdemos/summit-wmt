@@ -1,0 +1,17 @@
+/* card-carousel-bidirectional design tokens */
+:root {
+  --card-carousel-bi-gap: 16px;
+  --card-carousel-bi-card-border-width: 1px;
+  --card-carousel-bi-card-border-color: #dadada;
+  --card-carousel-bi-card-border-radius: var(--border-radius-card);
+  --card-carousel-bi-card-body-margin: 12px;
+  --card-carousel-bi-image-aspect-ratio: 1 / 1;
+  --card-carousel-bi-image-object-fit: cover;
+  --card-carousel-bi-nav-inset: 4px;
+  --card-carousel-bi-nav-inset-desktop: 8px;
+  --card-carousel-bi-nav-button-size: 36px;
+  --card-carousel-bi-nav-button-background: var(--background-color);
+  --card-carousel-bi-nav-button-hover-background: var(--light-color);
+  --card-carousel-bi-nav-button-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  --card-carousel-bi-transition-duration: 0.2s;
+}
