@@ -1,18 +1,14 @@
 @import url('./hero-tokens.css');
 
-.hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
-}
-
+/* ===== Base Hero: centered text over full-cover background ===== */
 .hero {
   position: relative;
-  padding: var(--hero-padding);
-  min-height: var(--hero-min-height);
+  padding: 16px 24px;
   overflow: hidden;
   display: flex;
   align-items: center;
   background-color: var(--color-walmart-blue);
+  border-radius: 8px;
 }
 
 /* All hero content sits above the background */
@@ -24,41 +20,72 @@
   z-index: 1;
 }
 
-/* Default: white text for heroes with dark backgrounds */
+/* Hero content container: full width for centering */
+.hero > div {
+  width: 100%;
+}
+
+/* Default: centered white text, padded to clear edge imagery */
+.hero > div > div {
+  text-align: center;
+  width: 100%;
+  padding-inline: 16px;
+}
+
 .hero h1 {
-  max-width: var(--hero-heading-max-width);
+  margin-inline: auto;
   color: var(--background-color);
-  font-size: var(--heading-font-size-xxl);
+  font-size: var(--heading-font-size-xl);
   line-height: 1.2;
   margin-top: 0;
+  margin-bottom: 4px;
 }
 
 .hero p:not(.hero-bg) {
   color: var(--background-color);
-  font-size: var(--body-font-size-m);
-  line-height: 1.5;
+  font-size: var(--body-font-size-s);
+  line-height: 1.4;
+  margin: 4px 0;
 }
 
 .hero a {
   color: var(--background-color);
 }
 
-/* Hero buttons: white pill on dark background */
+/* Hero CTA: underlined white text link (matching original skinny banner) */
 .hero a.button {
-  background-color: var(--background-color);
-  color: var(--color-walmart-blue);
-  border-color: transparent;
+  background-color: transparent;
+  color: var(--background-color);
+  border: none;
   position: relative;
   z-index: 1;
+  padding: 0;
+  font-size: var(--body-font-size-s);
+  text-decoration: underline;
 }
 
 .hero a.button:hover,
 .hero a.button:focus {
+  background-color: transparent;
+  color: var(--light-color);
+}
+
+/* Grid hero buttons: restore pill style for card-carousel heroes */
+.card-carousel-bidirectional-container .hero a.button {
+  background-color: var(--background-color);
+  color: var(--color-walmart-blue);
+  border-color: transparent;
+  padding: 8px 24px;
+  text-decoration: none;
+}
+
+.card-carousel-bidirectional-container .hero a.button:hover,
+.card-carousel-bidirectional-container .hero a.button:focus {
   background-color: var(--light-color);
   color: var(--color-walmart-blue-hover);
 }
 
-/* Background image — first image paragraph */
+/* ===== Background image: absolute fill ===== */
 .hero .hero-bg {
   position: absolute;
   z-index: 0;
@@ -72,25 +99,32 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-/* Fallback: if hero-bg class not set (no JS), treat first picture as background */
+.hero .hero-bg picture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Fallback: if hero-bg class not set (no JS) */
 .hero picture {
   position: absolute;
   z-index: 0;
   inset: 0;
-  object-fit: cover;
   box-sizing: border-box;
 }
 
 .hero picture img {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
-/* Overlay images (e.g., Express Delivery badge, decorative images) */
+/* ===== Overlay images (e.g., Express Delivery badge) ===== */
 .hero .hero-overlays {
   position: absolute;
   z-index: 1;
@@ -102,6 +136,12 @@
   pointer-events: none;
 }
 
+.hero .hero-overlays picture {
+  position: static;
+  z-index: auto;
+  inset: auto;
+}
+
 .hero .hero-overlays img {
   position: static;
   width: auto;
@@ -111,37 +151,221 @@
   object-fit: contain;
 }
 
-/* ===== Light-grey section override: dark text on light bg ===== */
-.light-grey .hero {
+/* ===== Grid heroes: left-aligned text, min-height, standard padding ===== */
+.card-carousel-bidirectional-container .hero {
+  min-height: var(--hero-min-height);
+  padding: var(--hero-padding);
+  align-items: flex-start;
+}
+
+.card-carousel-bidirectional-container .hero > div > div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-inline: 0;
+}
+
+.card-carousel-bidirectional-container .hero h1 {
+  max-width: var(--hero-heading-max-width);
+  margin-inline: 0;
+  font-size: var(--heading-font-size-xxl);
+  color: var(--text-color);
+  order: 1;
+}
+
+.card-carousel-bidirectional-container .hero p:not(.hero-bg) {
+  font-size: var(--body-font-size-m);
+  color: var(--text-color);
+}
+
+/* Subtitle before heading, button after */
+.card-carousel-bidirectional-container .hero .button-wrapper {
+  order: 2;
+}
+
+/* ===== Overlay hero (e.g. Spring Flowers banner): dark text, image bg ===== */
+.hero:has(.hero-overlays) {
   background-color: transparent;
+  padding: 32px 24px;
+  min-height: 200px;
+  overflow: visible;
 }
 
-.light-grey .hero h1 {
+.hero:has(.hero-overlays) > div > div {
+  text-align: center;
+  padding-inline: 16px;
+  box-sizing: border-box;
+}
+
+.hero:has(.hero-overlays) > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.hero:has(.hero-overlays) h1 {
+  color: var(--color-walmart-navy);
+  margin-inline: auto;
+  font-size: var(--heading-font-size-xl);
+  white-space: nowrap;
+}
+
+.hero:has(.hero-overlays) p:not(.hero-bg) {
+  color: var(--color-walmart-navy);
+  font-size: var(--heading-font-size-s);
+  white-space: nowrap;
+}
+
+.hero:has(.hero-overlays) a {
+  color: var(--color-walmart-navy);
+}
+
+.hero:has(.hero-overlays) a.button {
+  background-color: var(--background-color);
   color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 1000px;
 }
 
-.light-grey .hero p:not(.hero-bg) {
-  color: var(--text-color);
+.hero:has(.hero-overlays) a.button:hover,
+.hero:has(.hero-overlays) a.button:focus {
+  background-color: var(--light-color);
 }
 
-.light-grey .hero a {
-  color: var(--link-color);
+/* Overlay hero: background image fills hero as cover */
+.hero:has(.hero-overlays) .hero-bg {
+  position: absolute;
+  inset: 0;
 }
 
-.light-grey .hero a.button {
-  background-color: var(--color-walmart-blue);
-  color: var(--background-color);
+.hero:has(.hero-overlays) .hero-bg img,
+.hero:has(.hero-overlays) .hero-bg picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
 }
 
-.light-grey .hero a.button:hover,
-.light-grey .hero a.button:focus {
-  background-color: var(--color-walmart-blue-hover);
+.hero:has(.hero-overlays) .hero-bg picture img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
 }
 
+/* Light-grey hero overlays: split left/right */
+.hero:has(.hero-overlays) .hero-overlays {
+  inset: 0;
+  z-index: 2;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 12px;
+}
+
+.hero:has(.hero-overlays) .hero-overlays img {
+  max-width: 80px;
+  max-height: 60px;
+}
+
+/* Express Delivery badge: white card */
+.hero:has(.hero-overlays) .hero-overlays img:first-child {
+  background: var(--background-color);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+/* Flowers overlay: no card styling */
+.hero:has(.hero-overlays) .hero-overlays img:last-child {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ===== Tablet ===== */
+@media (width >= 600px) {
+  .hero > div > div {
+    padding-inline: 80px;
+  }
+
+  .hero:has(.hero-overlays) > div > div {
+    padding-inline: 180px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays img {
+    max-width: 140px;
+    max-height: 110px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays img:first-child {
+    border-radius: 20px;
+    padding: 10px;
+  }
+}
+
+/* ===== Desktop ===== */
 @media (width >= 900px) {
   .hero {
-    padding: var(--hero-padding-desktop);
+    padding: 32px;
+    min-height: 220px;
+  }
+
+  .hero h1 {
+    font-size: var(--heading-font-size-xl);
+  }
+
+  .hero p:not(.hero-bg) {
+    font-size: var(--heading-font-size-m);
+  }
+
+  .hero a.button {
+    font-size: var(--heading-font-size-m);
+  }
+
+  .hero > div > div {
+    padding-inline: 0;
+    max-width: 752px;
+    margin-inline: auto;
+  }
+
+  /* Card-carousel heroes: restore cover for product images */
+  .card-carousel-bidirectional-container .hero .hero-bg img,
+  .card-carousel-bidirectional-container .hero .hero-bg picture img {
+    object-fit: cover;
+  }
+
+  .card-carousel-bidirectional-container .hero {
     min-height: 340px;
+    padding: var(--hero-padding-desktop);
+  }
+
+  .hero:has(.hero-overlays) {
+    padding: 24px 40px;
+    min-height: 280px;
+  }
+
+  .hero:has(.hero-overlays) > div > div {
+    padding-inline: 260px;
+    max-width: none;
+  }
+
+  .hero:has(.hero-overlays) h1 {
+    font-size: var(--heading-font-size-xl);
   }
 
   .hero .hero-overlays {
@@ -151,5 +375,163 @@
   .hero .hero-overlays img {
     max-width: 220px;
     max-height: 160px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays {
+    padding: 32px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays img {
+    max-width: 240px;
+    max-height: 200px;
+  }
+
+  .hero:has(.hero-overlays) .hero-overlays img:first-child {
+    border-radius: 28px;
+    padding: 20px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+  }
+}
+
+/* ===== FanCards variant: structured title + promo image card ===== */
+
+/* Target: hero inside a section with a few-slides carousel (Section 7) */
+.card-carousel-bidirectional-container:has(.few-slides) .hero {
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  min-height: unset;
+  overflow: visible;
+  align-items: flex-start;
+}
+
+/* Inner content: grid layout for title, image, then description + Shop all on same row */
+.card-carousel-bidirectional-container:has(.few-slides) .hero > div > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto;
+  text-align: left;
+  padding-inline: 0;
+  max-width: none;
+  gap: 0;
+}
+
+/* Title: navy, bold, compact label — row 1, full width */
+.card-carousel-bidirectional-container:has(.few-slides) .hero h1 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  color: var(--color-walmart-navy);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  margin: 0 0 8px;
+  max-width: none;
+}
+
+/* Promo image: inline card with rounded corners — row 2, full width */
+.card-carousel-bidirectional-container:has(.few-slides) .hero .hero-bg {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  position: relative;
+  z-index: auto;
+  inset: auto;
+  margin: 0 0 8px;
+  border-radius: var(--border-radius-card);
+  overflow: hidden;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .hero .hero-bg img,
+.card-carousel-bidirectional-container:has(.few-slides) .hero .hero-bg picture {
+  position: relative;
+  inset: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .hero .hero-bg picture img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Override fallback hero picture rules */
+.card-carousel-bidirectional-container:has(.few-slides) .hero picture {
+  position: relative;
+  z-index: auto;
+  inset: auto;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .hero picture img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Description text: row 3 left — same line as Shop all */
+.card-carousel-bidirectional-container:has(.few-slides) .hero p:not(.hero-bg, .button-wrapper) {
+  grid-column: 1;
+  grid-row: 3;
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  line-height: 1.4;
+  margin: 0;
+  align-self: center;
+}
+
+/* Shop all wrapper: row 3 right — same line as description */
+.card-carousel-bidirectional-container:has(.few-slides) .hero .button-wrapper {
+  grid-column: 2;
+  grid-row: 3;
+  text-align: right;
+  margin: 0;
+  align-self: center;
+}
+
+/* Shop all: underlined text link, not pill button */
+.card-carousel-bidirectional-container:has(.few-slides) .hero a.button {
+  background: none;
+  color: var(--text-color);
+  text-decoration: underline;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: var(--body-font-size-xs);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .hero a.button:hover,
+.card-carousel-bidirectional-container:has(.few-slides) .hero a.button:focus {
+  background: none;
+  color: var(--link-color);
+}
+
+/* ===== FanCards desktop overrides ===== */
+@media (width >= 900px) {
+  .card-carousel-bidirectional-container:has(.few-slides) .hero {
+    padding: 0;
+    min-height: unset;
+  }
+
+  .card-carousel-bidirectional-container:has(.few-slides) .hero h1 {
+    font-size: var(--heading-font-size-s);
+  }
+
+  .card-carousel-bidirectional-container:has(.few-slides) .hero > div > div {
+    padding-inline: 0;
+    max-width: none;
+  }
+
+  .card-carousel-bidirectional-container:has(.few-slides) .hero p:not(.hero-bg, .button-wrapper) {
+    font-size: var(--body-font-size-xs);
+  }
+
+  .card-carousel-bidirectional-container:has(.few-slides) .hero a.button {
+    font-size: var(--body-font-size-xs);
   }
 }

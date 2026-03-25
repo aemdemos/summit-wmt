@@ -27,7 +27,7 @@
 .card-carousel-bidirectional .card-carousel-bidirectional-slide {
   scroll-snap-align: start;
   box-sizing: border-box;
-  border: var(--card-carousel-bi-card-border-width) solid var(--card-carousel-bi-card-border-color);
+  border: none;
   border-radius: var(--card-carousel-bi-card-border-radius);
   background-color: var(--background-color);
   overflow: hidden;
@@ -36,28 +36,40 @@
 /* Card body */
 .card-carousel-bidirectional .cards-card-body {
   margin: var(--card-carousel-bi-card-body-margin);
+  display: flex;
+  flex-direction: column;
 }
 
-.card-carousel-bidirectional .cards-card-body p {
-  margin: 0 0 4px;
+.card-carousel-bidirectional .cards-card-body p:not(.button-wrapper) {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
   font-size: var(--body-font-size-xs);
   line-height: 1.4;
 }
 
-.card-carousel-bidirectional .cards-card-body p strong {
+.card-carousel-bidirectional .cards-card-body p:not(.button-wrapper) strong {
   display: -webkit-box;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-weight: 400;
+  margin-bottom: 0;
   font-size: var(--body-font-size-xs);
   line-height: 1.3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  order: 2;
 }
 
-/* +Add action link as compact pill button */
-.card-carousel-bidirectional .cards-card-body a {
+/* +Add / Options: compact pill button (overrides global secondary) */
+.card-carousel-bidirectional .cards-card-body .button-wrapper {
+  order: -1;
+  margin: 0 0 12px;
+}
+
+.card-carousel-bidirectional .cards-card-body a.button.secondary {
   display: inline-block;
+  margin: 0;
   padding: 6px 16px;
   border-radius: var(--border-radius-pill);
   background-color: var(--color-walmart-blue);
@@ -66,17 +78,26 @@
   font-weight: 700;
   text-decoration: none;
   text-align: center;
-  margin-top: 4px;
+  border: none;
 }
 
-.card-carousel-bidirectional .cards-card-body a:hover {
+.card-carousel-bidirectional .cards-card-body a.button.secondary:hover {
   background-color: var(--color-walmart-blue-hover);
   color: var(--background-color);
   text-decoration: none;
 }
 
+/* Product price */
+.card-carousel-bidirectional .card-price {
+  font-weight: 700;
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+  order: 1;
+}
+
 /* Card image */
 .card-carousel-bidirectional .cards-card-image {
+  position: relative;
   line-height: 0;
 }
 
@@ -84,6 +105,19 @@
   width: 100%;
   aspect-ratio: var(--card-carousel-bi-image-aspect-ratio);
   object-fit: var(--card-carousel-bi-image-object-fit);
+}
+
+/* "+N options" badge between product image and body */
+.card-carousel-bidirectional .card-options-badge {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-color);
+  background-color: rgb(255 255 255 / 92%);
+  padding: 4px 0;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
 /* Navigation buttons */
@@ -164,13 +198,147 @@
   }
 }
 
-/* Desktop: ~4 cards visible */
+/* Desktop: 3 cards visible */
 @media (width >= 900px) {
   .card-carousel-bidirectional .card-carousel-bidirectional-slides {
-    grid-auto-columns: 23%;
+    grid-auto-columns: calc((100% - 48px) / 3);
+    gap: 24px;
   }
 
   .card-carousel-bidirectional.few-slides .card-carousel-bidirectional-slides {
     grid-auto-columns: 45%;
+  }
+}
+
+/* ===== FanCards carousel: product card refinements ===== */
+
+/* Show 2 cards at a time with generous spacing */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-carousel-bidirectional-slides {
+  grid-auto-columns: calc(30% - 40px);
+  gap: 200px;
+}
+
+/* Card surface: no border, no shadow */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-carousel-bidirectional-slide {
+  box-shadow: none;
+}
+
+/* Card image: edge-to-edge, 1:1 square, no padding/radius */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-image {
+  padding: 0;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-image p {
+  margin: 0;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-carousel-bidirectional-slide img {
+  border-radius: 0;
+}
+
+/* Card body: flush with image — negative margin pulls content up */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body {
+  margin: -24px 0 0;
+  padding: 0 8px 8px;
+  position: relative;
+}
+
+/* Inner paragraph: flex column to reorder Options above title */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body p:not(.button-wrapper) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Product title: body weight, 2-line clamp — appears below Options */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body p:not(.button-wrapper) strong {
+  font-weight: 400;
+  -webkit-line-clamp: 2;
+  font-size: 11px;
+  order: 2;
+  line-height: 1.3;
+}
+
+/* Options CTA: Walmart blue pill — appears first */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body a.button.secondary {
+  margin: 0;
+  padding: 4px 14px;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-walmart-blue);
+  color: var(--background-color);
+  font-size: 11px;
+  font-weight: 700;
+  border: none;
+}
+
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body a.button.secondary:hover {
+  background-color: var(--color-walmart-blue-hover);
+}
+
+/* Heart/wishlist icon: top-right of card image (all carousels) */
+.card-carousel-bidirectional .card-wishlist {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--background-color);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 15%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.card-carousel-bidirectional .card-wishlist svg {
+  width: 18px;
+  height: 18px;
+  stroke: #2e2f32;
+  fill: none;
+}
+
+/* Star rating row */
+.card-carousel-bidirectional .card-star-rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  padding: 0 8px 8px;
+}
+
+.card-carousel-bidirectional .card-star-rating svg {
+  flex-shrink: 0;
+}
+
+.card-carousel-bidirectional .card-review-count {
+  font-size: 11px;
+  color: #74767c;
+  margin-left: 2px;
+}
+
+/* Price range: bold text below Options button */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-price-range {
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--text-color);
+  order: 0;
+}
+
+/* Nav button: white circle with shadow, larger touch target */
+.card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .carousel-navigation-buttons button {
+  width: 44px;
+  height: 44px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+}
+
+/* Align carousel top with promo image (skip title row) */
+@media (width >= 900px) {
+  .card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional-wrapper {
+    padding-top: 0;
   }
 }
