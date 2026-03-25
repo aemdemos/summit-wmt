@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Footer Appearance Mapping",
+  "type": "object",
+  "properties": {
+    "background": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["solid", "gradient", "image", "video", "transparent"] },
+        "value": { "type": "string", "description": "CSS value: color hex, gradient, image URL" },
+        "isDark": { "type": "boolean", "description": "True if footer has dark background with light text" }
+      },
+      "required": ["type", "isDark"]
+    },
+    "borderTop": {
+      "type": "object",
+      "properties": {
+        "hasBorder": { "type": "boolean" },
+        "style": { "type": "string" },
+        "color": { "type": "string" },
+        "width": { "type": "string" }
+      },
+      "required": ["hasBorder"]
+    },
+    "shadow": {
+      "type": "object",
+      "properties": {
+        "hasShadow": { "type": "boolean" },
+        "value": { "type": "string" }
+      },
+      "required": ["hasShadow"]
+    },
+    "stickyBehavior": {
+      "type": "object",
+      "properties": {
+        "isSticky": { "type": "boolean" },
+        "stickyType": { "type": "string", "enum": ["none", "sticky-bottom", "fixed-bottom"] }
+      },
+      "required": ["isSticky"]
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "isFullWidth": { "type": "boolean" },
+        "maxWidth": { "type": "string" },
+        "hasSectionDividers": { "type": "boolean" },
+        "dividerStyle": { "type": "string" }
+      },
+      "required": ["isFullWidth"]
+    },
+    "layoutSpacing": {
+      "type": "object",
+      "description": "Padding/margin parity vs source — values as normalized px strings from getComputedStyle (e.g. 48px). Measure on live source, then on migrated preview; re-measure after CSS changes.",
+      "properties": {
+        "footerPaddingTop": { "type": "string", "description": "Footer root computed padding-top" },
+        "footerPaddingBottom": { "type": "string", "description": "Footer root computed padding-bottom" },
+        "contentInsetInline": { "type": "string", "description": "Main inner content horizontal inset (padding-left/right on wrapper or equivalent; single representative px if symmetric)" },
+        "columnGapApprox": { "type": "string", "description": "Approx horizontal gap between adjacent primary columns (px)" },
+        "majorBandGapApprox": { "type": "string", "description": "Approx vertical gap between major horizontal bands (e.g. link row vs promo vs bottom bar)" },
+        "notes": { "type": "string", "description": "Optional — e.g. asymmetric columns, rounded container padding" }
+      },
+      "required": ["footerPaddingTop", "footerPaddingBottom", "contentInsetInline", "columnGapApprox", "majorBandGapApprox"]
+    },
+    "sectionBackgrounds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sectionIndex": { "type": "integer" },
+          "background": { "type": "string" },
+          "isDifferent": { "type": "boolean" }
+        }
+      },
+      "description": "Per-section background when sections have different backgrounds"
+    },
+    "leadCaptureBand": {
+      "type": "object",
+      "description": "Optional — any prominent footer form band (newsletter, signup, lead form, etc.). Omit if the footer has no such band.",
+      "properties": {
+        "present": { "type": "boolean", "description": "True if this footer includes a multi-field capture/form band above the main link columns" },
+        "inputSurface": {
+          "type": "string",
+          "enum": ["light-gray", "dark-gray", "transparent", "matches-footer-bg"],
+          "description": "Visible surface treatment of text inputs (source vs migrated)"
+        },
+        "labelTreatment": {
+          "type": "string",
+          "enum": ["placeholder-inside", "label-above", "floating", "mixed"],
+          "description": "How field labels are presented"
+        },
+        "primaryButtonAlignment": {
+          "type": "string",
+          "enum": ["end", "start", "center", "full-width"],
+          "description": "Alignment of the primary submit/action button within the band"
+        },
+        "fieldLayoutDesktop": {
+          "type": "string",
+          "enum": ["single-row", "multi-row", "stacked"],
+          "description": "Desktop layout of text fields in the band: single-row = one horizontal row; multi-row = grid/wrap; stacked = one field per row"
+        },
+        "notes": { "type": "string", "description": "Optional — spacing or padding notes not covered by enums" }
+      },
+      "if": { "properties": { "present": { "const": true } }, "required": ["present"] },
+      "then": {
+        "required": ["present", "inputSurface", "labelTreatment", "primaryButtonAlignment", "fieldLayoutDesktop"]
+      }
+    },
+    "promoMediaBand": {
+      "type": "object",
+      "description": "Optional — tall photographic/promotional strip inside the footer (hero lineup, campaign image, etc.). Required in mapping when phase-1 detects a large image-dominant band or equivalent; omit if absent.",
+      "properties": {
+        "present": { "type": "boolean" },
+        "containerHeightPx": {
+          "type": "string",
+          "description": "Measured outer height of the media band container (px string, e.g. 697px)"
+        },
+        "mediaWidthBehavior": {
+          "type": "string",
+          "enum": ["full-bleed", "content-inset", "max-width-centered"],
+          "description": "Whether imagery spans viewport, sits inset with content padding, or is capped with max-width"
+        },
+        "objectFit": {
+          "type": "string",
+          "enum": ["cover", "contain", "fill", "none"],
+          "description": "Computed object-fit on the primary <img> (or representative media element)"
+        },
+        "domBandPosition": {
+          "type": "string",
+          "enum": ["above-lead-capture", "below-lead-capture", "between-cta-and-lead-capture", "other"],
+          "description": "Order of this band relative to CTA strip and lead-capture form"
+        },
+        "notes": { "type": "string" }
+      },
+      "if": { "properties": { "present": { "const": true } }, "required": ["present"] },
+      "then": {
+        "required": ["present", "containerHeightPx", "mediaWidthBehavior", "objectFit", "domBandPosition"]
+      }
+    },
+    "primaryLinkBand": {
+      "type": "object",
+      "description": "Optional — desktop layout of the main footer link/navigation area (multi-column grids vs accordions). Omit if the footer has no multi-link nav band.",
+      "properties": {
+        "present": { "type": "boolean" },
+        "desktopLinkLayoutPattern": {
+          "type": "string",
+          "enum": ["multi-column-static", "accordion-primary", "split-static-and-accordion", "single-column", "other"],
+          "description": "multi-column-static = several parallel link columns; accordion-primary = expand/collapse groups dominate; split-static-and-accordion = e.g. left flat list + right accordions"
+        },
+        "desktopVisibleLinkColumnsApprox": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Approximate count of parallel vertical link stacks at desktop (each static column counts; one accordion rail counts as 1 unless multiple rails sit side-by-side)"
+        },
+        "notes": { "type": "string" }
+      },
+      "if": { "properties": { "present": { "const": true } }, "required": ["present"] },
+      "then": {
+        "required": ["present", "desktopLinkLayoutPattern", "desktopVisibleLinkColumnsApprox"]
+      }
+    },
+    "noticeStrip": {
+      "type": "object",
+      "description": "Optional — distinct legal, certification, disclaimer, or badge block (often contrasting background). Omit if absent.",
+      "properties": {
+        "present": { "type": "boolean" },
+        "layout": {
+          "type": "string",
+          "enum": ["full-width-bar", "inset-card", "in-column", "none"],
+          "description": "full-width-bar = edge-to-edge strip; inset-card = self-contained box; in-column = inside a link column"
+        },
+        "background": {
+          "type": "string",
+          "enum": ["white", "light", "transparent", "dark", "matches-footer-bg"]
+        },
+        "markPosition": {
+          "type": "string",
+          "enum": ["start", "end", "center", "none"],
+          "description": "Position of emblem, seal, or logo relative to copy inside the block"
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "required": ["background", "borderTop", "shadow", "stickyBehavior", "layout", "layoutSpacing"]
+}

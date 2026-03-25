@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Footer Validation Agent Output",
+  "type": "object",
+  "properties": {
+    "status": { "type": "string", "enum": ["PASS", "FAIL"] },
+    "similarityScore": { "type": "number", "minimum": 0, "maximum": 1 },
+    "sectionMatch": { "type": "boolean" },
+    "linkMatch": { "type": "boolean" },
+    "imageMatch": { "type": "boolean" },
+    "formMatch": { "type": "boolean" },
+    "socialIconMatch": { "type": "boolean" },
+    "localeMatch": { "type": "boolean" },
+    "spacingMatch": { "type": "boolean" },
+    "fontMatch": { "type": "boolean" },
+    "mismatches": { "type": "array", "items": { "type": "string" } },
+    "recommendReAnalysis": { "type": "boolean" },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["status", "similarityScore", "sectionMatch", "linkMatch", "imageMatch", "mismatches", "recommendReAnalysis", "notes"]
+}

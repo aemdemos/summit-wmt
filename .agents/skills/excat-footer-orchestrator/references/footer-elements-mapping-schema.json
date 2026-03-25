@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Footer Elements Mapping",
+  "description": "Per-element hover and click behavior for all interactive footer elements",
+  "type": "object",
+  "properties": {
+    "elements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "description": "Unique ID e.g. section-0-social-instagram, section-1-link-col-0, section-2-locale-dropdown" },
+          "label": { "type": "string" },
+          "elementType": {
+            "type": "string",
+            "enum": ["social-icon", "link", "form-submit", "form-field", "locale-selector", "locale-option", "back-to-top", "video-play", "brand-logo", "newsletter-cta", "legal-link", "copyright", "other"]
+          },
+          "sectionIndex": { "type": "integer" },
+          "hoverBehavior": {
+            "type": "object",
+            "properties": {
+              "effect": { "type": "string", "description": "e.g. color-change, opacity-change, underline, scale, background-change, none" },
+              "value": { "type": "string" },
+              "transition": { "type": "string" }
+            },
+            "required": ["effect"]
+          },
+          "clickBehavior": {
+            "type": "object",
+            "properties": {
+              "action": { "type": "string", "description": "e.g. navigate, open-dropdown, submit-form, scroll-to-top, play-video, toggle, none" },
+              "url": { "type": "string" },
+              "details": { "type": "string" }
+            },
+            "required": ["action"]
+          },
+          "hasAnimation": { "type": "boolean" },
+          "animationDetails": { "type": "string" }
+        },
+        "required": ["id", "label", "elementType", "hoverBehavior", "clickBehavior"]
+      }
+    },
+    "totalElementsTested": { "type": "integer" }
+  },
+  "required": ["elements", "totalElementsTested"]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Migrated mobile footer behavior mapping",
+  "description": "Observed on migrated localhost preview at 375×812; compared to phase-4-mobile.json by compare-footer-mobile-behavior.js",
+  "type": "object",
+  "properties": {
+    "hasAccordionSections": { "type": "boolean" },
+    "accordionExpandMode": { "type": "string", "description": "single | multi | none — must match phase-4 accordionDetails.expandMode" },
+    "formLayoutChange": { "type": "string" },
+    "hasLocaleSelector": { "type": "boolean" },
+    "localeSelectorMobileBehavior": { "type": "string" },
+    "hasSocialIcons": { "type": "boolean" },
+    "socialIconsLayoutChange": { "type": "string" },
+    "hasVideo": { "type": "boolean" },
+    "videoMobileBehavior": { "type": "string" },
+    "stackingOrderLength": { "type": "integer", "description": "Count of sections in mobile stacking order (must match phase-4 stackingOrder.length)" },
+    "stackingOrder": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional; stackingOrderLength may be derived from this array if stackingOrderLength omitted"
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": [
+    "hasAccordionSections",
+    "accordionExpandMode",
+    "hasLocaleSelector",
+    "hasSocialIcons",
+    "hasVideo",
+    "stackingOrderLength"
+  ]
+}
