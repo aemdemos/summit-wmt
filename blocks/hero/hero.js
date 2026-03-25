@@ -1,10 +1,14 @@
 /**
  * Hero block decoration.
  * Handles overlay images wrapped in <em> tags (e.g., Express Delivery badge).
+ * Also handles overlay images authored as plain paragraphs (without <em>).
  * Works with both DA (img) and doc-based (picture) image formats.
  * @param {Element} block The hero block element
  */
 export default function decorate(block) {
+  const contentDiv = block.querySelector(':scope > div > div');
+  if (!contentDiv) return;
+
   // Find <em> elements that contain images (overlay images from parser)
   const emWithImages = [...block.querySelectorAll('em')].filter(
     (em) => em.querySelector('picture, img'),
@@ -31,11 +35,7 @@ export default function decorate(block) {
       }
     });
 
-    // Insert overlay container as direct child of the inner content div
-    const contentDiv = block.querySelector(':scope > div > div');
-    if (contentDiv) {
-      contentDiv.prepend(overlay);
-    }
+    contentDiv.prepend(overlay);
   }
 
   // Mark the first image paragraph as the hero background
@@ -44,6 +44,35 @@ export default function decorate(block) {
     const bgP = firstImg.closest('p');
     if (bgP) {
       bgP.classList.add('hero-bg');
+    }
+  }
+
+  // Fallback: if no overlay was created from <em> tags, check for additional
+  // image-only paragraphs after the background. These are overlay images authored
+  // as plain content (without <em> formatting) in AEM document authoring.
+  if (!contentDiv.querySelector('.hero-overlays')) {
+    const bgP = contentDiv.querySelector('.hero-bg');
+    if (bgP) {
+      const extraImagePs = [...contentDiv.querySelectorAll(':scope > p')]
+        .filter((p) => p !== bgP
+          && !p.classList.contains('button-wrapper')
+          && p.querySelector('picture, img')
+          && !p.textContent.trim());
+      if (extraImagePs.length > 0) {
+        const overlay = document.createElement('div');
+        overlay.className = 'hero-overlays';
+        extraImagePs.forEach((p) => {
+          const pic = p.querySelector('picture');
+          if (pic) {
+            overlay.append(pic);
+          } else {
+            const img = p.querySelector('img');
+            if (img) overlay.append(img);
+          }
+          p.remove();
+        });
+        contentDiv.prepend(overlay);
+      }
     }
   }
 }
