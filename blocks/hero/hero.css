@@ -136,6 +136,13 @@
   pointer-events: none;
 }
 
+.hero .hero-overlays picture {
+  position: static;
+  z-index: auto;
+  inset: auto;
+  display: contents;
+}
+
 .hero .hero-overlays img {
   position: static;
   width: auto;
