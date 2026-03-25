@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Footer Structural Summary",
+  "description": "Extracted from migrated page for comparison with source phases",
+  "type": "object",
+  "properties": {
+    "sectionCount": { "type": "integer" },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": { "type": "integer" },
+          "type": { "type": "string" },
+          "hasImages": { "type": "boolean" },
+          "imageCount": { "type": "integer", "description": "Prefer explicit count; compare falls back from hasImages if omitted" },
+          "linkColumnCount": { "type": "integer" },
+          "linkCount": { "type": "integer" },
+          "hasSocialIcons": { "type": "boolean" },
+          "socialIconCount": { "type": "integer" },
+          "hasForm": { "type": "boolean" },
+          "hasLocaleSelector": { "type": "boolean" },
+          "hasVideo": { "type": "boolean" },
+          "hasBrandLogos": { "type": "boolean" },
+          "brandLogoCount": { "type": "integer" }
+        },
+        "required": ["index", "type", "hasImages"]
+      }
+    }
+  },
+  "required": ["sectionCount", "sections"]
+}

@@ -209,7 +209,7 @@ Once `migration-work/design-system-extracted.json` exists with `"status": "compl
 - User says: "validate nav structure", "fix header", "header doesn't match source" → invoke for validation/remediation.
 
 **How to invoke:**
-Read and follow the complete workflow in `.agents/skills/excat-navigation-orchestrator/SKILL.md`. Execute every phase in order — desktop first (Phases 1–3, aggregate, implement, validate), then mobile only after customer confirmation. Do not skip phases or validation gates.
+Read and follow the complete workflow in `.agents/skills/excat-navigation-orchestrator/SKILL.md`. Execute every phase in order — desktop first (Phases 1–3, aggregate, implement, validate), then mobile only after customer confirmation. Do not skip phases or validation gates. PostToolUse / Stop enforcement for this workflow is implemented in `.agents/hooks/nav-validation-gate.js` (see the skill for how it pairs with `migration-work/navigation-validation/scripts/`).
 
 **Prerequisites:**
 
@@ -226,6 +226,35 @@ Read and follow the complete workflow in `.agents/skills/excat-navigation-orches
 - Mobile is implemented only after customer confirms desktop; mobile follows the same structural + style validation rigor.
 
 **Do NOT use for:** Simple link lists without screenshot evidence, pages not yet migrated, footer or non-header layout work.
+
+---
+
+### Footer / Site Footer Migration (use Footer Orchestrator)
+
+**When a user asks to migrate, import, replicate, or instrument a site footer, ALWAYS use the Footer Orchestrator skill.** This applies to multi-section footers, link columns, social icons, locale selectors, forms, legal/disclaimer strips, and mobile stacking or accordion behavior.
+
+**Trigger patterns:**
+
+- User says: "migrate footer", "build footer", "footer from URL", "replicate footer", "instrument footer", "create EDS footer" → invoke directly.
+- User says: "validate footer", "fix footer", "footer doesn't match source" → invoke for validation or remediation.
+
+**How to invoke:**
+Read and follow the complete workflow in `.agents/skills/excat-footer-orchestrator/SKILL.md`. Execute every step in order — desktop first (phases 1–3, aggregate, implement, desktop validation), then mobile only after the customer confirms desktop. Do not skip validation gates or scripted checks documented in the skill.
+
+**Prerequisites:**
+
+- The page should already be migrated when the footer sits on a real page (use page migration first if it is not).
+- The design system should already be extracted (see "Design System Extraction" above).
+- A local dev server at `http://localhost:3000` for migrated preview when validating against localhost.
+- Playwright MCP (or equivalent) for real pointer events and screenshots where the skill requires them.
+
+**Key rules:**
+
+- Desktop implementation must include full CSS — no raw unstyled markup.
+- All text content, links, labels, and images belong in `content/footer.plain.html`, not hardcoded in `blocks/footer/footer.js`.
+- Enforcement uses validation scripts (copied into `migration-work/footer-validation/scripts/` per the skill) plus the **Footer validation hook** at `.agents/hooks/footer-validation-gate.js`.
+
+**Do NOT use for:** Header or navigation work (use Navigation Orchestrator above); trivial copyright-only footers with no structured migration; pages not yet migrated when a full-page context is required.
 
 ---
 

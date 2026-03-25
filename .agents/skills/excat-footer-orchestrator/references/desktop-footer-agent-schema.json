@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Desktop Footer Agent Output",
+  "description": "Schema for phase-1 section detection and phase-2 section mapping",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "sectionCount": { "type": "integer", "minimum": 0 },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": { "type": "integer" },
+              "type": {
+                "type": "string",
+                "enum": ["link-group", "social-icons", "legal", "form", "brand-logos", "video", "locale", "disclaimer", "copyright", "contact-info", "mixed", "unknown"]
+              },
+              "heightPx": { "type": "number" },
+              "hasImages": { "type": "boolean" }
+            },
+            "required": ["index", "type", "heightPx", "hasImages"]
+          }
+        },
+        "totalHeightPx": { "type": "number" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "uncertainty": { "type": "boolean" },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["sectionCount", "sections", "confidence", "uncertainty", "notes"]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": { "type": "integer" },
+              "type": { "type": "string" },
+              "hasImages": { "type": "boolean" },
+              "hasForm": { "type": "boolean" },
+              "formType": { "type": "string", "enum": ["cta-link", "inline-form", "none"] },
+              "formDetails": { "type": "object" },
+              "hasSocialIcons": { "type": "boolean" },
+              "socialIconDetails": { "type": "object" },
+              "hasLocaleSelector": { "type": "boolean" },
+              "localeSelectorDetails": { "type": "object" },
+              "hasVideo": { "type": "boolean" },
+              "videoDetails": { "type": "object" },
+              "hasBrandLogos": { "type": "boolean" },
+              "hasContactInfo": { "type": "boolean" },
+              "hasCopyright": { "type": "boolean" },
+              "hasDisclaimer": { "type": "boolean" },
+              "hasBackToTop": { "type": "boolean" },
+              "linkColumns": { "type": "array" },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "label": { "type": "string" },
+                    "elementType": { "type": "string" },
+                    "hoverBehavior": { "type": "object" },
+                    "clickBehavior": { "type": "object" }
+                  },
+                  "required": ["id", "label", "elementType", "hoverBehavior", "clickBehavior"]
+                }
+              }
+            },
+            "required": ["index", "type", "hasImages", "hasForm", "hasSocialIcons", "hasLocaleSelector"]
+          }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "uncertainty": { "type": "boolean" },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["sections", "confidence", "uncertainty", "notes"]
+    }
+  ]
+}

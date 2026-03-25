@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Footer Elements Behavior Register",
+  "type": "object",
+  "properties": {
+    "allValidated": { "type": "boolean" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "elementType": { "type": "string" },
+          "hoverMatch": {
+            "type": "object",
+            "properties": {
+              "matches": { "type": "boolean" },
+              "sourceEffect": { "type": "string" },
+              "migratedEffect": { "type": "string" }
+            },
+            "required": ["matches"]
+          },
+          "clickMatch": {
+            "type": "object",
+            "properties": {
+              "matches": { "type": "boolean" },
+              "sourceAction": { "type": "string" },
+              "migratedAction": { "type": "string" }
+            },
+            "required": ["matches"]
+          },
+          "status": { "type": "string", "enum": ["validated", "failed"] },
+          "remediation": { "type": "string" },
+          "note": { "type": "string" }
+        },
+        "required": ["id", "label", "hoverMatch", "clickMatch", "status"]
+      }
+    }
+  },
+  "required": ["allValidated", "items"]
+}
