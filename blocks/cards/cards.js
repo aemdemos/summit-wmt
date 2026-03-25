@@ -35,5 +35,7 @@ export default function decorate(block) {
 
   if (isHubSpoke) {
     block.classList.add('hub-spoke');
+  } else if (cards.length === 5) {
+    block.classList.add('promo-grid');
   }
 }

@@ -381,34 +381,84 @@ main .section.accent h6 {
   color: var(--color-walmart-navy);
 }
 
+/* Section heading + subtitle above hero + carousel */
+main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper h3 {
+  font-weight: 400;
+  color: var(--text-color-secondary);
+}
+
 /* Two-column sections: hero + carousel side-by-side */
 @media (width >= 900px) {
   main .section.hero-container.card-carousel-bidirectional-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     gap: 0;
     max-width: var(--max-width-site);
     margin: var(--spacing-xl) auto;
     padding: 0 var(--spacing-xl);
   }
 
-  main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper {
-    grid-column: 1 / -1;
-    padding: 0;
-  }
-
+  /* Hero spans left column, full height */
   main .section.hero-container.card-carousel-bidirectional-container > .hero-wrapper {
+    grid-column: 1;
+    grid-row: 1 / -1;
     padding: 0;
     margin: 0;
     min-width: 0;
     overflow: hidden;
   }
 
+  /* Headings sit above carousel in right column */
+  main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 0 var(--spacing-m);
+  }
+
+  main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper h2 {
+    font-size: var(--heading-font-size-m);
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+
+  main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper h3 {
+    font-size: var(--body-font-size-m);
+    font-weight: 400;
+    color: var(--text-color-secondary);
+    margin: 0 0 var(--spacing-s);
+  }
+
+  /* Carousel below headings in right column */
   main .section.hero-container.card-carousel-bidirectional-container > .card-carousel-bidirectional-wrapper {
-    padding: 0;
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0 0 0 var(--spacing-m);
     margin: 0;
     min-width: 0;
     overflow: hidden;
+  }
+
+  /* FanCards section: equal 50/50 split, single row, vertically centered */
+  main .section.hero-container.card-carousel-bidirectional-container:has(.few-slides) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0 40px;
+    align-items: center;
+  }
+
+  /* Hero spans the single row */
+  main .section.hero-container.card-carousel-bidirectional-container:has(.few-slides) > .hero-wrapper {
+    grid-row: 1;
+  }
+
+  /* Carousel in right column, no artificial offset */
+  main .section.hero-container.card-carousel-bidirectional-container:has(.few-slides) > .card-carousel-bidirectional-wrapper {
+    grid-row: 1;
+    padding-top: 0;
+    padding-left: 0;
   }
 }
 
