@@ -140,7 +140,6 @@
   position: static;
   z-index: auto;
   inset: auto;
-  display: contents;
 }
 
 .hero .hero-overlays img {
