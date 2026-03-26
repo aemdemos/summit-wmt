@@ -1,16 +1,71 @@
-/* header design tokens (layout only; colors/typography use global tokens) */
+/* Walmart header design tokens */
 :root {
-  --header-nav-max-width: 1248px;
-  --header-nav-max-width-desktop: 1264px;
-  --header-nav-padding: 0 24px;
-  --header-nav-padding-desktop: 0 32px;
-  --header-nav-gap: 24px;
-  --header-nav-gap-desktop: 32px;
-  --header-brand-width: 128px;
-  --header-dropdown-width: 200px;
-  --header-dropdown-padding: 16px;
-  --header-dropdown-left: -24px;
-  --header-hamburger-size: 22px;
-  --header-hamburger-bar-width: 20px;
-  --header-hamburger-bar-height: 2px;
+  /* layout */
+  --header-max-width: 1440px;
+  --header-padding-inline: 16px;
+  --header-primary-height: 56px;
+  --header-secondary-height: 48px;
+  --header-total-height: calc(var(--header-primary-height) + var(--header-secondary-height));
+
+  /* colors */
+  --header-primary-bg: #0071dc;
+  --header-primary-text: #fff;
+  --header-hover-bg: #004c91;
+  --header-fulfillment-bg: rgb(0 0 0 / 30%);
+  --header-secondary-bg: #e6f1fc;
+  --header-secondary-text: #2e2f32;
+
+  /* pill-shaped items */
+  --header-item-height: 52px;
+  --header-item-radius: 32px;
+  --header-item-transition: background 100ms cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* brand */
+  --header-logo-size: 36px;
+  --header-logo-container: 52px;
+  --header-logo-radius: 37px;
+
+  /* fulfillment */
+  --header-fulfillment-width: 314px;
+
+  /* search */
+  --header-search-height: 40px;
+  --header-search-radius: 20px;
+  --header-search-bg: #fff;
+  --header-search-btn-size: 32px;
+  --header-search-btn-bg: #004c91;
+
+  /* megamenu */
+  --header-megamenu-width: 760px;
+  --header-megamenu-rail-width: 260px;
+  --header-megamenu-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+  --header-megamenu-overlay-bg: rgb(0 0 0 / 40%);
+  --header-megamenu-active-bg: #e6f1fc;
+  --header-megamenu-active-accent: #0071dc;
+
+  /* pill links */
+  --header-pill-bg: #fff;
+  --header-pill-text: #2e2f32;
+  --header-pill-hover-bg: #e6e6e6;
+  --header-pill-radius: 9999px;
+  --header-pill-padding: 6px 12px;
+
+  /* hamburger */
+  --header-hamburger-size: 24px;
+
+  /* mobile */
+  --header-mobile-menu-width: 100vw;
+}
+
+@media (width >= 600px) {
+  :root {
+    --header-padding-inline: 24px;
+  }
+}
+
+@media (width >= 900px) {
+  :root {
+    --header-padding-inline: 32px;
+    --header-megamenu-width: 800px;
+  }
 }
