@@ -22,6 +22,15 @@ const ICON = {
 
 /* ── Helpers ────────────────────────────────────────────── */
 
+/**
+ * Find the first link inside a list item.
+ * AEM wraps links in <p> tags in .plain.html, so check both
+ * :scope > a (local dev) and :scope > p > a (AEM).
+ */
+function findLink(li) {
+  return li.querySelector(':scope > a') || li.querySelector(':scope > p > a');
+}
+
 function closeAllMenus(nav) {
   nav.querySelectorAll('.nav-megamenu-trigger[aria-expanded="true"]').forEach((t) => {
     t.setAttribute('aria-expanded', 'false');
@@ -66,7 +75,7 @@ function buildMegamenuPanel(menuLi) {
   const content = document.createElement('div');
   content.className = 'megamenu-content';
 
-  const menuLink = menuLi.querySelector(':scope > a');
+  const menuLink = findLink(menuLi);
   const menuName = menuLink ? menuLink.textContent.trim() : '';
   const railTitle = document.createElement('div');
   railTitle.className = 'megamenu-rail-title';
@@ -75,7 +84,7 @@ function buildMegamenuPanel(menuLi) {
 
   const categories = menuLi.querySelectorAll(':scope > ul > li');
   categories.forEach((cat, i) => {
-    const catLink = cat.querySelector(':scope > a');
+    const catLink = findLink(cat);
     if (!catLink) return;
 
     // Rail button
@@ -132,7 +141,7 @@ function buildMegamenuPanel(menuLi) {
       subpanel.append(heading);
 
       // Detect subsection groups (indicated by <strong> in child items)
-      const hasSubsections = cat.querySelector(':scope > ul > li > strong') !== null;
+      const hasSubsections = cat.querySelector(':scope > ul > li > strong, :scope > ul > li > p > strong') !== null;
 
       if (hasSubsections) {
         const groups = document.createElement('div');
@@ -502,7 +511,7 @@ export default async function decorate(block) {
 
   if (menuW) {
     menuW.querySelectorAll(':scope > ul > li').forEach((li) => {
-      const link = li.querySelector(':scope > a');
+      const link = findLink(li);
       if (!link) return;
 
       const wrap = document.createElement('div');
@@ -573,7 +582,7 @@ export default async function decorate(block) {
 
   if (menuW) {
     menuW.querySelectorAll(':scope > ul > li').forEach((li) => {
-      const link = li.querySelector(':scope > a');
+      const link = findLink(li);
       if (!link) return;
 
       const section = document.createElement('div');
@@ -589,7 +598,7 @@ export default async function decorate(block) {
       body.className = 'nav-drawer-body';
 
       li.querySelectorAll(':scope > ul > li').forEach((cat) => {
-        const catLink = cat.querySelector(':scope > a');
+        const catLink = findLink(cat);
         if (!catLink) return;
         const catEl = document.createElement('a');
         catEl.className = 'nav-drawer-link';
