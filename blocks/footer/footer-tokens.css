@@ -1,6 +1,30 @@
 /* footer design tokens */
 :root {
-  --footer-max-width: var(--max-width-site);
-  --footer-padding: 40px 24px 24px;
-  --footer-padding-desktop: 40px 32px 24px;
+  --footer-max-width: 1440px;
+
+  /* feedback band */
+  --footer-feedback-bg: #e6f1fc;
+  --footer-feedback-text: #2e2f32;
+  --footer-feedback-padding: 30px 1.5rem;
+  --footer-feedback-btn-bg: #fff;
+  --footer-feedback-btn-border: #2e2f32;
+  --footer-feedback-btn-text: #2e2f32;
+  --footer-feedback-btn-radius: 9999px;
+  --footer-feedback-btn-padding: 8px 20px;
+
+  /* legal band */
+  --footer-legal-bg: #004f9a;
+  --footer-legal-text: #fff;
+  --footer-legal-padding: 1.5rem;
+  --footer-legal-link-gap: 6px 24px;
+  --footer-legal-font-size: 14px;
+  --footer-copyright-font-size: 12px;
+}
+
+@media (width >= 900px) {
+  :root {
+    --footer-legal-link-gap: 6px 30px;
+    --footer-legal-padding: 2rem 2rem;
+    --footer-feedback-padding: 30px 2rem;
+  }
 }
