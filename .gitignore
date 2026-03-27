@@ -12,3 +12,4 @@ localhost-key.pem
 .vscode
 .cursor
 Trace*.json
+migration-work/navigation-validation/
