@@ -8,7 +8,7 @@
   --header-total-height: calc(var(--header-primary-height) + var(--header-secondary-height));
 
   /* colors */
-  --header-primary-bg: #0071dc;
+  --header-primary-bg: #0053e2;
   --header-primary-text: #fff;
   --header-hover-bg: #004c91;
   --header-fulfillment-bg: rgb(0 0 0 / 30%);
@@ -29,8 +29,8 @@
   --header-fulfillment-width: 314px;
 
   /* search */
-  --header-search-height: 40px;
-  --header-search-radius: 20px;
+  --header-search-height: 52px;
+  --header-search-radius: 26px;
   --header-search-bg: #fff;
   --header-search-btn-size: 32px;
   --header-search-btn-bg: #004c91;
