@@ -383,6 +383,7 @@ main .section.accent h6 {
 
 /* Section heading + subtitle above hero + carousel */
 main .section.hero-container.card-carousel-bidirectional-container > .default-content-wrapper h3 {
+  font-size: 16px;
   font-weight: 400;
   color: var(--text-color-secondary);
 }
@@ -464,15 +465,15 @@ main .section.hero-container.card-carousel-bidirectional-container > .default-co
 
 /* ===== Terms & Conditions compact styling ===== */
 main > .section:last-of-type {
-  padding: var(--spacing-xl) 0;
-  margin: 0;
+  padding: 16px 0 24px;
+  margin: 8px 0 0;
 }
 
 main > .section:last-of-type h1 {
-  font-size: var(--heading-font-size-m);
+  font-size: 22px;
   font-weight: 700;
-  margin-top: 1.2em;
-  margin-bottom: 0.3em;
+  margin-top: 0.8em;
+  margin-bottom: 0.1em;
   color: var(--text-color);
 }
 
@@ -481,10 +482,11 @@ main > .section:last-of-type h1:first-child {
 }
 
 main > .section:last-of-type p {
-  font-size: var(--body-font-size-xs);
+  font-size: 15px;
+  font-weight: 400;
   color: var(--text-color-secondary);
-  line-height: 1.5;
+  line-height: 1.4;
   margin-top: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.2em;
 }
 
