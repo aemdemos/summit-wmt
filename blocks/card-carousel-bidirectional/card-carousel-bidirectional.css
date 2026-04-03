@@ -70,11 +70,11 @@
 .card-carousel-bidirectional .cards-card-body a.button.secondary {
   display: inline-block;
   margin: 0;
-  padding: 6px 16px;
+  padding: 8px 20px;
   border-radius: var(--border-radius-pill);
   background-color: var(--color-walmart-blue);
   color: var(--background-color);
-  font-size: var(--body-font-size-xs);
+  font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   text-align: center;
@@ -90,7 +90,7 @@
 /* Product price */
 .card-carousel-bidirectional .card-price {
   font-weight: 700;
-  font-size: var(--body-font-size-xs);
+  font-size: 16px;
   color: var(--text-color);
   order: 1;
 }
@@ -262,11 +262,11 @@
 /* Options CTA: Walmart blue pill — appears first */
 .card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .cards-card-body a.button.secondary {
   margin: 0;
-  padding: 4px 14px;
+  padding: 8px 20px;
   border-radius: var(--border-radius-pill);
   background-color: var(--color-walmart-blue);
   color: var(--background-color);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   border: none;
 }
@@ -323,7 +323,7 @@
 /* Price range: bold text below Options button */
 .card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-price-range {
   font-weight: 700;
-  font-size: 11px;
+  font-size: 16px;
   color: var(--text-color);
   order: 0;
 }

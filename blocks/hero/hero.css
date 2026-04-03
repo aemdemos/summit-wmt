@@ -80,10 +80,11 @@
 /* Grid hero buttons: restore pill style for card-carousel heroes */
 .card-carousel-bidirectional-container .hero a.button {
   background-color: var(--background-color);
-  color: var(--color-walmart-blue);
+  color: var(--text-color);
   border-color: transparent;
   padding: 8px 24px;
   text-decoration: none;
+  font-size: 12px;
 }
 
 .card-carousel-bidirectional-container .hero a.button:hover,
@@ -160,9 +161,18 @@
 
 /* ===== Grid heroes: left-aligned text, min-height, standard padding ===== */
 .card-carousel-bidirectional-container .hero {
+  height: auto;
   min-height: var(--hero-min-height);
   padding: var(--hero-padding);
   align-items: flex-start;
+  aspect-ratio: 16 / 9;
+  overflow: visible;
+}
+
+.card-carousel-bidirectional-container .hero .hero-bg img,
+.card-carousel-bidirectional-container .hero .hero-bg picture img {
+  object-fit: cover;
+  object-position: right center;
 }
 
 .card-carousel-bidirectional-container .hero > div > div {
@@ -175,13 +185,13 @@
 .card-carousel-bidirectional-container .hero h1 {
   max-width: var(--hero-heading-max-width);
   margin-inline: 0;
-  font-size: var(--heading-font-size-xxl);
+  font-size: 40px;
   color: var(--text-color);
   order: 1;
 }
 
 .card-carousel-bidirectional-container .hero p:not(.hero-bg) {
-  font-size: var(--body-font-size-m);
+  font-size: 20px;
   color: var(--text-color);
 }
 
@@ -351,15 +361,18 @@
     margin-inline: auto;
   }
 
-  /* Card-carousel heroes: restore cover for product images */
+  /* Card-carousel heroes: cover image, aspect-ratio sized */
   .card-carousel-bidirectional-container .hero .hero-bg img,
   .card-carousel-bidirectional-container .hero .hero-bg picture img {
     object-fit: cover;
+    object-position: right center;
   }
 
   .card-carousel-bidirectional-container .hero {
-    min-height: 340px;
+    height: auto;
+    min-height: var(--hero-min-height);
     padding: var(--hero-padding-desktop);
+    aspect-ratio: 16 / 9;
   }
 
   .hero:has(.hero-overlays) {
@@ -408,6 +421,7 @@
 .card-carousel-bidirectional-container:has(.few-slides) .hero {
   background-color: transparent;
   border-radius: 0;
+  height: auto;
   padding: 0;
   min-height: unset;
   overflow: visible;
