@@ -134,8 +134,7 @@ footer .footer p.footer-copyright {
 /* ── Tablet+ ── */
 @media (width >= 600px) {
   footer .footer-links {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: center;
   }
 }
