@@ -23,7 +23,7 @@ header .nav-primary-inner {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 21px 16px 5px;
+  padding: var(--header-primary-padding-top) 16px var(--header-primary-padding-bottom);
   height: var(--header-primary-height);
 }
 
@@ -803,9 +803,15 @@ header .nav-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  top: calc(var(--header-total-height) + 16px);
+  top: calc(var(--header-primary-outer-height) + 16px);
   background: var(--header-megamenu-overlay-bg);
   z-index: 5;
+}
+
+@media (width >= 900px) {
+  header .nav-overlay {
+    top: calc(var(--header-total-height) + 16px);
+  }
 }
 
 header .nav-overlay.is-open {
@@ -818,8 +824,8 @@ header .nav-drawer {
   background: #fff;
   color: var(--header-secondary-text);
   overflow-y: auto;
-  min-height: calc(100dvh - var(--header-primary-height));
-  max-height: calc(100dvh - var(--header-primary-height));
+  min-height: calc(100dvh - var(--header-primary-outer-height));
+  max-height: calc(100dvh - var(--header-primary-outer-height));
 }
 
 header nav[aria-expanded='true'] .nav-drawer {
@@ -906,13 +912,4 @@ header .nav-drawer-pill {
   font-size: 13px;
 }
 
-/* ── Body offset for fixed header ─────────────────────── */
-body {
-  padding-top: var(--header-primary-height);
-}
-
-@media (width >= 900px) {
-  body {
-    padding-top: var(--header-total-height);
-  }
-}
+/* Body offset for fixed header: styles/styles.css (critical path). Tokens: header-tokens.css */

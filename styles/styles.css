@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@import url('../blocks/header/header-tokens.css');
+
 :root {
   /* colors - Walmart brand palette */
   --background-color: #fff;
@@ -99,6 +101,8 @@
 body {
   display: none;
   margin: 0;
+  /* Reserve space for fixed .nav-wrapper on first paint (sync with blocks/header/header.css) */
+  padding-top: var(--header-primary-outer-height);
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
@@ -110,7 +114,13 @@ body.appear {
   display: block;
 }
 
+/* Fixed chrome lives in .nav-wrapper; avoid extra in-flow strip (see body padding-top) */
 header {
+  height: auto;
+  min-height: 0;
+}
+
+body[data-breadcrumbs] header {
   height: var(--header-height);
 }
 
@@ -124,7 +134,17 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+/* Gap below fixed chrome; body padding-top only reserves header height (CLS doc) */
+main {
+  padding-top: var(--spacing-xxl);
+}
+
 @media (width >= 900px) {
+  /* Two-row header: this block must follow the base `body` rule so padding-top wins over mobile */
+  body {
+    padding-top: var(--header-total-height);
+  }
+
   body[data-breadcrumbs] {
     --header-height: calc(var(--nav-height) + var(--breadcrumbs-height));
   }
