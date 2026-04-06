@@ -5,6 +5,12 @@
   padding: 0;
 }
 
+/* Standalone hero: image anchored to bottom */
+.hero-container:not(.card-carousel-bidirectional-container) .hero .hero-bg img,
+.hero-container:not(.card-carousel-bidirectional-container) .hero .hero-bg picture img {
+  object-position: center bottom;
+}
+
 /* ===== Base Hero: centered text over full-cover background ===== */
 .hero {
   position: relative;
@@ -204,7 +210,7 @@
 .hero:has(.hero-overlays) {
   background-color: transparent;
   padding: 16px 24px;
-  height: 252px;
+  height: 220px;
   min-height: unset;
   overflow: visible;
 }
@@ -285,29 +291,30 @@
   inset: 0;
   z-index: 2;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 12px;
+  align-items: center;
+  padding: 16px 24px;
 }
 
 .hero:has(.hero-overlays) .hero-overlays img {
-  max-width: 80px;
-  max-height: 60px;
+  max-width: 140px;
+  max-height: 110px;
 }
 
-/* Express Delivery badge: white card */
+/* Express Delivery badge: image already has white card baked in */
 .hero:has(.hero-overlays) .hero-overlays img:first-child {
-  background: var(--background-color);
-  border-radius: 12px;
-  padding: 6px;
-  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
-/* Flowers overlay: no card styling */
+/* Flowers overlay: no card styling, bottom-aligned to sit inside banner */
 .hero:has(.hero-overlays) .hero-overlays img:last-child {
   background: transparent;
   border-radius: 0;
   padding: 0;
   box-shadow: none;
+  align-self: flex-end;
 }
 
 /* ===== Tablet ===== */
@@ -330,10 +337,6 @@
     max-height: 110px;
   }
 
-  .hero:has(.hero-overlays) .hero-overlays img:first-child {
-    border-radius: 20px;
-    padding: 10px;
-  }
 }
 
 /* ===== Desktop ===== */
@@ -377,7 +380,7 @@
 
   .hero:has(.hero-overlays) {
     padding: 16px 40px;
-    height: 252px;
+    height: 220px;
     min-height: unset;
   }
 
@@ -400,19 +403,19 @@
   }
 
   .hero:has(.hero-overlays) .hero-overlays {
-    padding: 32px;
+    padding: 16px 40px;
   }
 
   .hero:has(.hero-overlays) .hero-overlays img {
-    max-width: 240px;
-    max-height: 200px;
+    max-width: 180px;
+    max-height: 100px;
   }
 
-  .hero:has(.hero-overlays) .hero-overlays img:first-child {
-    border-radius: 28px;
-    padding: 20px;
-    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+  .hero:has(.hero-overlays) .hero-overlays img:last-child {
+    align-self: center;
+    margin-top: 20px;
   }
+
 }
 
 /* ===== FanCards variant: structured title + promo image card ===== */
