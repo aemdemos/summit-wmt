@@ -8,7 +8,7 @@
 /* Standalone hero: image anchored to bottom */
 .hero-container:not(.card-carousel-bidirectional-container) .hero .hero-bg img,
 .hero-container:not(.card-carousel-bidirectional-container) .hero .hero-bg picture img {
-  object-position: center bottom;
+  object-position: center center;
 }
 
 /* ===== Base Hero: centered text over full-cover background ===== */
@@ -250,7 +250,7 @@
   font-size: var(--body-font-size-s);
   text-decoration: none;
   padding: 8px 24px;
-  border: none;
+  border: 1px solid black;
   border-radius: 1000px;
 }
 
@@ -407,8 +407,8 @@
   }
 
   .hero:has(.hero-overlays) .hero-overlays img {
-    max-width: 180px;
-    max-height: 100px;
+    max-width: unset;
+    max-height: 150px;
   }
 
   .hero:has(.hero-overlays) .hero-overlays img:last-child {

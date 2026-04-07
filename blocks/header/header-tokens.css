@@ -1,11 +1,12 @@
 /* Walmart header design tokens */
 :root {
-  /* layout */
-  --header-max-width: 1440px;
+  /* layout: --header-max-width tracks main rail (styles/styles.css --max-width-site) */
+  --header-max-width: var(--max-width-site);
   --header-padding-inline: 16px;
   --header-primary-height: 56px;
   --header-primary-padding-top: 21px;
   --header-primary-padding-bottom: 5px;
+
   /* content-box row: padding + inner height (matches .nav-primary-inner) */
   --header-primary-outer-height: calc(
     var(--header-primary-padding-top) + var(--header-primary-height) + var(--header-primary-padding-bottom)

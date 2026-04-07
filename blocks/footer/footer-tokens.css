@@ -1,6 +1,7 @@
 /* footer design tokens */
 :root {
-  --footer-max-width: 1440px;
+  /* align with main section rail — token defined in styles/styles.css */
+  --footer-max-width: var(--max-width-site);
 
   /* feedback band */
   --footer-feedback-bg: #e6f1fc;
