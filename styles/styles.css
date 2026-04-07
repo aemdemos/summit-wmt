@@ -485,16 +485,12 @@ main .section.hero-container.card-carousel-bidirectional-container > .default-co
 }
 
 /* ===== Terms & Conditions compact styling ===== */
-
-/* Target section containing T&C headings — works whether it's last or second-to-last (metadata section may follow) */
-main > .section:last-of-type,
-main > .section:nth-last-of-type(2):not(.hero-container, .cards-container, .card-carousel-bidirectional-container) {
+main .section.terms {
   padding: 16px 0 24px;
   margin: 8px 0 0;
 }
 
-main > .section:last-of-type h1,
-main > .section:nth-last-of-type(2):not(.hero-container, .cards-container, .card-carousel-bidirectional-container) h1 {
+main .section.terms h1 {
   font-size: 22px;
   font-weight: 700;
   margin-top: 0.8em;
@@ -502,13 +498,11 @@ main > .section:nth-last-of-type(2):not(.hero-container, .cards-container, .card
   color: var(--text-color);
 }
 
-main > .section:last-of-type h1:first-child,
-main > .section:nth-last-of-type(2):not(.hero-container, .cards-container, .card-carousel-bidirectional-container) h1:first-child {
+main .section.terms h1:first-child {
   margin-top: 0;
 }
 
-main > .section:last-of-type p,
-main > .section:nth-last-of-type(2):not(.hero-container, .cards-container, .card-carousel-bidirectional-container) p {
+main .section.terms p {
   font-size: 15px;
   font-weight: 400;
   color: var(--text-color-secondary);
