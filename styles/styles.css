@@ -101,6 +101,7 @@
 body {
   display: none;
   margin: 0;
+
   /* Reserve space for fixed .nav-wrapper on first paint (sync with blocks/header/header.css) */
   padding-top: var(--header-primary-outer-height);
   background-color: var(--background-color);
@@ -484,12 +485,12 @@ main .section.hero-container.card-carousel-bidirectional-container > .default-co
 }
 
 /* ===== Terms & Conditions compact styling ===== */
-main > .section:last-of-type {
+main .section.terms {
   padding: 16px 0 24px;
   margin: 8px 0 0;
 }
 
-main > .section:last-of-type h1 {
+main .section.terms h1 {
   font-size: 22px;
   font-weight: 700;
   margin-top: 0.8em;
@@ -497,11 +498,11 @@ main > .section:last-of-type h1 {
   color: var(--text-color);
 }
 
-main > .section:last-of-type h1:first-child {
+main .section.terms h1:first-child {
   margin-top: 0;
 }
 
-main > .section:last-of-type p {
+main .section.terms p {
   font-size: 15px;
   font-weight: 400;
   color: var(--text-color-secondary);
