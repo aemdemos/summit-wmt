@@ -215,7 +215,7 @@
 /* Show 2 cards at a time with generous spacing */
 .card-carousel-bidirectional-container:has(.few-slides) .card-carousel-bidirectional .card-carousel-bidirectional-slides {
   grid-auto-columns: calc(30% - 40px);
-  gap: 200px;
+  gap: 210px;
 }
 
 /* Card surface: no border, no shadow */
